@@ -1,0 +1,12 @@
+DROP DATABASE IF EXISTS driver;
+CREATE DATABASE driver;
+USE driver;
+
+CREATE TABLE user(
+DriverId INT PRIMARY KEY,
+Name VARCHAR(100),
+Rating INT,
+TotalRides INT,
+);
+
+CREATE TABLE 

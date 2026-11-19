@@ -149,9 +149,70 @@ WHERE WarehouseID IN(
     SELECT WarehouseID
     FROM WAREHOUSE
     WHERE Manager = 'Lucille Smith'
-)
+);
 
 -- 2.46
+SELECT SKU, SKU_Description,INVENTORY.WarehouseID
+FROM INVENTORY,WAREHOUSE
+WHERE INVENTORY.WarehouseId = WAREHOUSE.WarehouseId
+AND Manager = 'Lucille Smith';
+
+-- 2.47
+
+SELECT SKU, SKU_Description, INVENTORY.WarehouseID
+FROM INVENTORY
+JOIN WAREHOUSE
+ON INVENTORY.WarehouseID = WAREHOUSE.WarehouseID
+WHERE Manager = 'Lucille Smith';
+
+-- 2.48
+SELECT WarehouseID, AVG(QuantityOnHand) AS AverageQuantity
+FROM INVENTORY
+WHERE WarehouseId IN(
+    SELECT WarehouseId 
+    FROM WAREHOUSE
+    WHERE Manager = 'Lucille Smith'   
+)
+GROUP BY WarehouseId;
+
+-- 2.49
+SELECT INVENTORY.WarehouseID, AVG(QuantityOnHand) AS AverageQuantity
+FROM INVENTORY,WAREHOUSE
+WHERE INVENTORY.WarehouseId = WAREHOUSE.WarehouseId
+AND Manager = 'Lucille Smith'
+GROUP BY INVENTORY.WarehouseId;
+
+-- 2.50
+SELECT INVENTORY.WarehouseID, AVG(QuantityOnHand) AS AverageQuantity
+FROM INVENTORY
+JOIN WAREHOUSE
+ON INVENTORY.WarehouseID = WAREHOUSE.WarehouseID
+WHERE Manager = 'Lucille Smith'
+GROUP BY INVENTORY.WarehouseID;
+
+-- 2.51
+SELECT WAREHOUSE.WarehouseID, WarehouseCity, WarehouseState, Manager,
+       SKU, SKU_Description, QuantityOnHand
+FROM INVENTORY
+JOIN WAREHOUSE
+ON INVENTORY.WarehouseID = WAREHOUSE.WarehouseID
+WHERE Manager = 'Lucille Smith';
+
+-- 2.52
+
+SELECT WarehouseID,
+       SUM(QuantityOnOrder) AS TotalItemsOnOrder,
+       SUM(QuantityOnHand) AS TotalItemsOnHand
+FROM INVENTORY
+GROUP BY WarehouseID, QuantityOnOrder;
+
+-- 2.55
+
+SELECT *
+FROM WAREHOUSE
+LEFT JOIN INVENTORY
+USING (WarehouseID);
+
 
 
 
